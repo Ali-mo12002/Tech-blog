@@ -8,7 +8,7 @@ router.get('/', withAuth, async (req, res) => {
     res.json(posts);
   } catch (error) {
     console.error('Error fetching posts:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Internal ssserver error' });
   }
 });
 

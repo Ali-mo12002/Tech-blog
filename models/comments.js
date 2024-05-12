@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../config/connection');
 
 class Comment extends Model {}
 Comment.init(
@@ -12,6 +12,13 @@ Comment.init(
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     }
-});
+},
+{
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'comment',
+  });
 
 module.exports = Comment;

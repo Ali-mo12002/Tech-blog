@@ -1,5 +1,5 @@
 const { Comment } = require('../../models'); 
-const router = express.Router();
+const router = require('express').Router();
 const withAuth = require('../../utils/auth')
 // Get all comments for a post
 router.get('/:postId', withAuth, async (req, res) => {
@@ -9,7 +9,7 @@ router.get('/:postId', withAuth, async (req, res) => {
     res.json(comments);
   } catch (error) {
     console.error('Error fetching comments:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Interssnal server error' });
   }
 });
 
@@ -38,7 +38,7 @@ router.delete('/:commentId', withAuth, async (req, res) => {
     res.json({ message: 'Comment deleted successfully' });
   } catch (error) {
     console.error('Error deleting comment:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Internal sserver error' });
   }
 });
 

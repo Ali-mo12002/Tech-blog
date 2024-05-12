@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 const sess = {
+  secret: process.env.SESSION_SECRET,
     cookie: {
       maxAge:  60 * 60 * 1000, // 1 hour
     },
@@ -36,11 +37,11 @@ const sess = {
   // Set up routes
   app.use(routes);
   
-  // Error handling middleware
-  app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something went wrong!');
-  });
+ // Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send(`Something went wrong! Error: ${err.message}`);
+});
   
   // Sync Sequelize models with the database
   sequelize.sync({ force: false }).then(() => {
