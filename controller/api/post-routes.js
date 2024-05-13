@@ -2,7 +2,7 @@ const { Post } = require('../../models');
 const router = require('express').Router();
 const withAuth = require('../../utils/auth'); 
 // Get all posts
-router.get('/', withAuth, async (req, res) => {
+router.get('/',  async (req, res) => {
   try {
     const posts = await Post.findAll();
     res.json(posts);
@@ -13,7 +13,7 @@ router.get('/', withAuth, async (req, res) => {
 });
 
 // Create a new post
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
   const { title, content } = req.body;
   try {
     const newPost = await Post.create({ title, content });
