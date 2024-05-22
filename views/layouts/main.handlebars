@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Blog</title>
     <link rel="stylesheet" href="/css/jass.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
-<body>
-    <header>
+<header>
         <div class="container">
             <h1 class="logo">Tech Blog</h1>
             <nav>
@@ -17,22 +17,25 @@
                     {{#if loggedIn}}
                         <li><a href="#" id="logout">Logout</a></li>
                     {{else}}
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="/login">Signup</a></li>
+                        <li><a href="/login" class="signupBtn">Login</a></li>
+                        <li><a href="/login" class="signupBtn">Signup</a></li>
                     {{/if}}
                 </ul>
             </nav>
         </div>
     </header>
+    
+    <main>
 
     {{{body}}}
+</main>
+    
 
-    <footer>
+<footer>
         <div class="container">
             <p>&copy; 2024 Tech Blog</p>
         </div>
     </footer>
-</body>
 <script src="./js/login.js"></script>
 <script src="./js/logout.js"></script>
 <script src="./js/posts.js"></script>

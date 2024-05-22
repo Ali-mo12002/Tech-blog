@@ -40,14 +40,17 @@ const signupFormHandler = async (event) => {
       }
     }
   };
-  
+const loginForm = document.getElementById('login-form');
+if (loginForm){
   document.addEventListener('DOMContentLoaded', () => {
-
-  document
-    .querySelector('.login-form')
-    .addEventListener('submit', loginFormHandler);
   
+
     document
-    .querySelector('.signup-form')
-    .addEventListener('submit', signupFormHandler);
-  })
+      .querySelector('.login-form')
+      .addEventListener('submit', loginFormHandler);
+    
+      document
+      .querySelector('.signup-form')
+      .addEventListener('submit', signupFormHandler);
+    });
+};

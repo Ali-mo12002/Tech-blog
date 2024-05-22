@@ -10,8 +10,8 @@ router.post('/',  async (req, res) => {
     });
 
     req.session.save(() => {
+      req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
-      req.session.name = req.body.username; // Set the name in the session
       res.redirect('/');
     });
   } catch (err) {
@@ -19,33 +19,30 @@ router.post('/',  async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// Login
 router.post('/login', async (req, res) => {
   try {
-    const dbUserData = await User.findOne({
-      where: {
-        username: req.body.username,
-      },
-    });
+    const userData = await User.findOne({ where: { username: req.body.username } });
 
-    if (!dbUserData) {
-      return res.status(400).json({ message: 'Incorrect username or password. Please try again!' });
+    if (!userData) {
+      res.status(400).json({ message: 'Incorrect username or password, please try again' });
+      return;
     }
 
-    const validPassword = await dbUserData.checkPassword(req.body.password);
+    const validPassword = await bcrypt.compare(req.body.password, userData.password);
 
     if (!validPassword) {
-      return res.status(400).json({ message: 'Incorrect username or password. Please try again!' });
+      res.status(400).json({ message: 'Incorrect username or password, please try again' });
+      return;
     }
 
-    req.session.loggedIn = true;
-    req.session.name = dbUserData.username; // Set the name in the session
     req.session.save(() => {
-      res.redirect('/');
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+      res.json({ user: userData, message: 'You are now logged in!' });
     });
+
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json(err);
   }
 });
@@ -60,5 +57,6 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
 
 module.exports = router;
