@@ -40,7 +40,7 @@ const signupFormHandler = async (event) => {
       }
     }
   };
-const loginForm = document.getElementById('login-form');
+const loginForm = document.getElementsByClassName('signupBtn');
 if (loginForm){
   document.addEventListener('DOMContentLoaded', () => {
   
