@@ -253,3 +253,50 @@ a{
   textarea:disabled {
     height: auto;
   }
+
+  #all-posts-list{
+    background-color: #333;
+    margin: 50px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+  }
+  li{
+    color: #fff;
+  }
+  .post-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .post-content {
+    margin-bottom: 15px;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+  }
+  .post-meta {
+    font-size: 0.9em;
+    color: #bababa;
+    display: flex;
+    justify-content: space-between;
+  }
+  .home-post-item{
+    border: 1px solid #ccc;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+.homepage-post-link{
+    font-size: 30px;
+}
+.homepage-post-link:hover{
+    color: #666;
+}
+#homepage{
+    text-align: center;
+    margin-top: 15px;
+    color: #333;
+    font-size: 35px;
+}

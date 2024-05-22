@@ -2,10 +2,19 @@ const { Post, User } = require('../../models');
 const router = require('express').Router();
 const withAuth = require('../../utils/auth'); 
 // Get all posts
-router.get('/',  async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const posts = await Post.findAll();
-    res.json(posts);
+    const allPosts = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ],
+      order: [['createdAt', 'DESC']]
+    });
+
+    res.json(allPosts);
   } catch (error) {
     console.error('Error fetching posts:', error);
     res.status(500).json({ message: 'Internal server error' });
