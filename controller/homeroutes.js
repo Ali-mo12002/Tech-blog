@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const session = require('express-session');
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 // GET homepage
@@ -56,4 +55,26 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+
+
+router.get('/posts/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [{ model: Comment }] // Include the Comment model to fetch associated comments
+    });
+      if (!postData) {
+      res.status(404).json({ message: 'No post found with this id!' });
+      return;
+    }
+
+    const post = postData.get({ plain: true });
+    console.log(post);
+    res.render('post', { 
+      post,
+      loggedIn: req.session.loggedIn 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;

@@ -22,8 +22,8 @@ router.get('/', async (req, res) => {
 });
 router.get('/userposts', withAuth, async (req, res) => {
   try {
-    const userId = req.user.id || req.session.user_id;
-
+    const userId = req.user.id
+    
     if (!userId) {
       return res.status(400).json({ message: 'User ID is not defined' });
     }
@@ -39,14 +39,31 @@ router.get('/userposts', withAuth, async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    console.log("HELLO");
+    const post = await Post.findByPk(req.params.id);
+    if (!post) {
+      res.status(404).json({ message: 'Post not found' });
+      return;
+    }
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 // Create a new post
 router.post('/', withAuth, async (req, res) => {
   try {
+    const userId = req.user.id
+    console.log
     const newPost = await Post.create({
       ...req.body,
-      user_id: req.user.id, 
+      user_id: userId, 
     });
-
+    console.log('gello');
     res.status(200).json(newPost);
   } catch (err) {
     console.error(err);

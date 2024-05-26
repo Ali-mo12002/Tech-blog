@@ -42,6 +42,8 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: #fff;
+    font-size: 20px;
+
 }
 
 /* Footer styles */
@@ -299,4 +301,65 @@ a{
     margin-top: 15px;
     color: #333;
     font-size: 35px;
+}
+
+#post-container{
+    background-color: #333;
+    margin: 40px 40px;
+    padding: 20px;
+    border-radius: 20px;
+}
+#post-container h1{
+    color:#fff;
+    text-align: center;
+    margin: 10px;
+    font-size: 40px;
+}
+#post-container p{
+    font-size: 30px;
+    color: #fff;
+}
+#post-container h2{
+    text-align: center;
+}
+.line{
+    height: 5px;
+    width: 100%;
+    background-color: white;
+    margin: 20px 0;
+}
+#post-id{
+    display: none;
+}
+#comments-list li{
+    background-color:#333;
+    margin: 10px;
+    padding: 8px;
+    list-style: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    
+}
+.commenttext {
+    font-size: 25px;
+}
+
+#comment-content{
+    border: 1p solid white;
+    background-color: #333;
+    color: white;
+}
+#comment-content:focus {
+    outline: none;
+}
+
+#logout{
+    text-decoration: none;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    font-size: 20px;
+}
+#logout:hover{
+    cursor:pointer;
 }

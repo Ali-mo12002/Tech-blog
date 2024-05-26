@@ -1,0 +1,23 @@
+<body>
+    <div id="post-container">
+
+     <h1>{{post.title}}</h1>
+     <div class="line"></div>
+      <p id="post-content">{{post.content}}</p>
+     <div class="line"></div>
+
+      <section id="comments">
+      <h2>Comments</h2>
+      
+      <form id="new-comment-form">
+        <textarea id="comment-content" name="content" rows="4" required></textarea>
+        <button type="submit">Add Comment</button>
+      </form>
+      <ul id="comments-list"></ul>
+
+    </section>
+    </div>
+    <p id="post-id">{{post.id}}</p>
+    
+  <script src="/js/userposts.js"></script>
+</body>

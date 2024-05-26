@@ -15,7 +15,7 @@
                     <li><a href="/">Homepage</a></li>
                     <li><a href="/dashboard">Dashboard</a></li>
                     {{#if loggedIn}}
-                        <li><a href="#" id="logout">Logout</a></li>
+                        <li><button id="logout">Logout</button></li>
                     {{else}}
                         <li><a href="/login" class="signupBtn">Login</a></li>
                         <li><a href="/login" class="signupBtn">Signup</a></li>
@@ -35,9 +35,8 @@
         <div class="container">
             <p>&copy; 2024 Tech Blog</p>
         </div>
-    </footer>
-<script src="./js/login.js"></script>
-<script src="./js/logout.js"></script>
-<script src="./js/posts.js"></script>
-<script src="./js/homepage.js"></script>
+</footer>
+    
+<script src="/js/logout.js"></script>
+
 </html>

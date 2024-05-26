@@ -1,11 +1,20 @@
-const { Comment } = require('../../models'); 
+const { Comment, User } = require('../../models'); 
 const router = require('express').Router();
 const withAuth = require('../../utils/auth')
 // Get all comments for a post
-router.get('/:postId', withAuth, async (req, res) => {
+router.get('/:postId', async (req, res) => {
   const { postId } = req.params;
   try {
-    const comments = await Comment.findAll({ where: { postId } });
+    const comments = await Comment.findAll({
+      where: { postId },
+      include: [
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ],
+      order: [['created_at', 'DESC']]
+    });
     res.json(comments);
   } catch (error) {
     console.error('Error fetching comments:', error);
@@ -14,15 +23,21 @@ router.get('/:postId', withAuth, async (req, res) => {
 });
 
 // Create a new comment for a post
-router.post('/:postId', withAuth, async (req, res) => {
-  const { postId } = req.params;
-  const { text } = req.body;
+router.post('/:postId',withAuth, async (req, res) => {
   try {
-    const newComment = await Comment.create({ text, postId });
-    res.status(201).json(newComment);
-  } catch (error) {
-    console.error('Error creating comment:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    const { postId } = req.params;
+    req.body.post_id = postId
+    const userId = req.user.id
+    req.body.user_id = userId
+    const newComment = await Comment.create({
+      ...req.body,
+      userId
+    });
+
+    res.status(200).json(newComment);
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
   }
 });
 
